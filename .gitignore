@@ -1,0 +1,24 @@
+# Windows Zone.Identifier metadata
+*:Zone.Identifier
+*Zone.Identifier
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
