@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <title>IT4200 · API Arcade</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="API Arcade home"><span class="brand-icon">✦</span><span>IT4200 <strong>ARCADE</strong><small>Fall 2026 · Flask API</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-page="overview"><span>◫</span> Overview</button>
+        <button class="nav-link" data-page="arcade"><span>◈</span> Arcade</button>
+        <button class="nav-link" data-page="tools"><span>⌘</span> Developer tools</button>
+        <button class="nav-link" data-page="explore"><span>✧</span> Explore API</button>
+      </nav>
+      <div class="sidebar-footer"><span class="status-dot" id="sidebar-dot"></span><span id="sidebar-status">Checking connection…</span><small>Hosted on Render · API proxy</small></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="page-name">Overview</strong></div><div class="top-actions"><span class="api-pill"><span class="status-dot" id="top-dot"></span><span id="api-state">Connecting</span></span><a class="outline-link" href="https://two026-it4200-fall.onrender.com/" target="_blank" rel="noopener">API JSON ↗</a></div></header>
+      <div class="content">
+        <section id="overview" class="page active">
+          <div class="hero"><div class="hero-copy"><span class="eyebrow">WELCOME TO THE PLAYGROUND <span>✦</span></span><h1>One API.<br><em>Endless possibilities.</em></h1><p>Play with your classmates’ endpoints, test random generators, and turn raw JSON into something fun.</p><button class="primary-btn" data-jump="arcade">Explore the arcade <span>→</span></button></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="glow-disc">✦</div><span class="spark s1">✧</span><span class="spark s2">✳</span><span class="spark s3">✦</span></div></div>
+          <div class="section-heading"><div><span class="eyebrow muted">AT A GLANCE</span><h2>Dashboard</h2></div><span class="hint">Live data from the hosted Flask API</span></div>
+          <div class="stats"><div class="stat-card"><span class="stat-icon indigo">⬡</span><span class="stat-label">API status</span><strong id="stat-status">Checking…</strong><small>Backend health</small></div><div class="stat-card"><span class="stat-icon pink">⌘</span><span class="stat-label">Available endpoints</span><strong id="stat-endpoints">—</strong><small>Registered API routes</small></div><div class="stat-card"><span class="stat-icon mint">✦</span><span class="stat-label">Interactive experiences</span><strong>10</strong><small>Ready to explore</small></div></div>
+          <div class="section-heading"><div><span class="eyebrow muted">QUICK START</span><h2>Pick your adventure</h2></div></div>
+          <div class="feature-grid"><button class="feature-card purple" data-jump="arcade"><span class="feature-emoji">🎰</span><span class="feature-tag">PLAY</span><strong>The Arcade</strong><span>Slots, dice, coin flips and more. Let the API decide.</span><b>Launch arcade ↗</b></button><button class="feature-card teal" data-jump="tools"><span class="feature-emoji">⌨️</span><span class="feature-tag">BUILD</span><strong>Developer Tools</strong><span>Generate URL slugs, count words, and test inputs.</span><b>Open tools ↗</b></button><button class="feature-card orange" data-jump="explore"><span class="feature-emoji">🔮</span><span class="feature-tag">DISCOVER</span><strong>Surprise Me</strong><span>Random facts, prophecies, compliments, and cats.</span><b>Start exploring ↗</b></button></div>
+        </section>
+
+        <section id="arcade" class="page"><div class="page-intro"><span class="eyebrow">THE FUN STUFF</span><h1>Welcome to the <em>arcade.</em></h1><p>Each interaction makes a real request to your Python API. No fake results.</p></div>
+          <div class="module-grid">
+            <article class="module"><div class="module-head"><span class="module-icon lilac">🎰</span><div><h3>Lucky Slots</h3><code>GET /api/lucky-slot-machine</code></div></div><p>Spin three symbols. Matching pairs win, and triples hit the jackpot.</p><div class="slot-reels" id="slot-reels"><span>✦</span><span>✦</span><span>✦</span></div><div class="result-line" id="slot-result" aria-live="polite">Ready when you are.</div><button class="primary-btn full" id="spin-btn">Spin the reels →</button></article>
+            <article class="module"><div class="module-head"><span class="module-icon pinkish">🪙</span><div><h3>Coin Flip</h3><code>GET /coinflip/&lt;choice&gt;</code></div></div><p>Call it before the toss. Heads or tails?</p><div class="choice-row" role="group" aria-label="Coin side"><button class="choice-btn selected" data-coin="heads">Heads</button><button class="choice-btn" data-coin="tails">Tails</button></div><div class="coin" id="coin-visual">?</div><div class="result-line" id="coin-result" aria-live="polite">Make your call.</div><button class="primary-btn full" id="flip-btn">Flip coin →</button></article>
+            <article class="module"><div class="module-head"><span class="module-icon blueish">🎲</span><div><h3>Dice Roller</h3><code>GET /dice-roll</code></div></div><p>Customize the number and sides of your dice.</p><div class="form-pair"><label>Dice count<input id="dice-count" type="number" min="1" max="10" value="2"></label><label>Sides per die<input id="dice-sides" type="number" min="2" max="100" value="6"></label></div><div class="dice-display" id="dice-display">⚄ ⚂</div><div class="result-line" id="dice-result" aria-live="polite">Ready to roll.</div><button class="primary-btn full" id="dice-btn">Roll dice →</button></article>
+            <article class="module"><div class="module-head"><span class="module-icon amberish">🎱</span><div><h3>Magic 8-Ball</h3><code>GET /8Ball</code></div></div><p>Ask a question and get an answer from the universe.</p><label class="field-label">Your question<input id="eight-question" type="text" placeholder="Will my tests pass?" maxlength="180"></label><div class="eight-ball"><span id="eight-answer">8</span></div><div class="result-line" id="eight-result" aria-live="polite">The future is mysterious.</div><button class="primary-btn full" id="eight-btn">Ask the 8-ball →</button></article>
+          </div>
+        </section>
+
+        <section id="tools" class="page"><div class="page-intro"><span class="eyebrow">FOR THE BUILDERS</span><h1>Developer <em>tools.</em></h1><p>Practical utilities backed by the endpoints in your Flask application.</p></div><div class="module-grid tools-grid">
+          <article class="module"><div class="module-head"><span class="module-icon blueish">⌘</span><div><h3>Slug Generator</h3><code>GET /api/slugify</code></div></div><p>Convert text into URL-friendly strings.</p><label class="field-label">Text<input id="slug-input" type="text" value="Hello IT4200 World!" placeholder="Enter a title"></label><label class="field-label">Separator<select id="slug-separator"><option value="-">Hyphen (-)</option><option value="_">Underscore (_)</option><option value=".">Period (.)</option></select></label><div class="output-block"><span>GENERATED SLUG</span><strong id="slug-output">—</strong><button id="copy-slug" class="copy-btn" title="Copy slug" aria-label="Copy slug">Copy</button></div><button class="primary-btn full" id="slug-btn">Generate slug →</button></article>
+          <article class="module"><div class="module-head"><span class="module-icon mintish">≡</span><div><h3>Word Counter</h3><code>GET /word-count</code></div></div><p>Count words, characters, and estimated reading time.</p><label class="field-label">Your text<textarea id="word-input" rows="5" placeholder="Paste or type something here…">Build something cool with Flask and Python.</textarea></label><div class="count-stats"><div><strong id="word-words">—</strong><span>Words</span></div><div><strong id="word-characters">—</strong><span>Characters</span></div><div><strong id="word-reading">—</strong><span>Minutes</span></div></div><div class="result-line" id="word-result" aria-live="polite"></div><button class="primary-btn full" id="word-btn">Analyze text →</button></article>
+        </div></section>
+
+        <section id="explore" class="page"><div class="page-intro"><span class="eyebrow">A LITTLE RANDOMNESS</span><h1>Explore the <em>unexpected.</em></h1><p>Discover some of the most creative endpoints your class built.</p></div><div class="module-grid">
+          <article class="module"><div class="module-head"><span class="module-icon lilac">🔮</span><div><h3>Developer Oracle</h3><code>GET /oracle</code></div></div><p>A prophecy for your next pull request.</p><label class="field-label">Oracle category<select id="oracle-category"><option value="mystical">Mystical</option><option value="networking">Networking</option><option value="git">Git</option><option value="systems">Systems</option></select></label><blockquote class="quote-output" id="oracle-output">“The oracle is listening…”</blockquote><button class="primary-btn full" id="oracle-btn">Reveal prophecy →</button></article>
+          <article class="module"><div class="module-head"><span class="module-icon amberish">🐈</span><div><h3>Cat Generator</h3><code>GET /catbox</code></div></div><p>Meet a random cat with an unexpected personality.</p><label class="field-label">Your lucky number (0–10000)<input id="cat-number" type="number" min="0" max="10000" value="42"></label><div class="cat-card" id="cat-output"><span class="cat-avatar">🐱</span><strong>Who will you meet?</strong><small>Generate a cat to find out.</small></div><button class="primary-btn full" id="cat-btn">Meet a cat →</button></article>
+          <article class="module"><div class="module-head"><span class="module-icon mintish">💡</span><div><h3>Random Fact</h3><code>GET /random-fact</code></div></div><p>A surprising thought from the class collection.</p><blockquote class="quote-output" id="fact-output">“Something interesting is coming…”</blockquote><button class="primary-btn full" id="fact-btn">New fact →</button></article>
+          <article class="module"><div class="module-head"><span class="module-icon pinkish">✨</span><div><h3>Compliment Generator</h3><code>GET /compliment</code></div></div><p>Because your code deserves some recognition.</p><label class="field-label">Name<input id="compliment-name" type="text" value="Developer" maxlength="80"></label><blockquote class="quote-output" id="compliment-output">“You deserve a little encouragement.”</blockquote><button class="primary-btn full" id="compliment-btn">Get a compliment →</button></article>
+          </div></section>
+      </div>
+      <footer class="footer">Built for IT4200 · Fall 2026 <span>Powered by Flask + a little curiosity ✦</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
