@@ -51,6 +51,29 @@
             <article class="module"><div class="module-head"><span class="module-icon blueish">🎲</span><div><h3>Dice Roller</h3><code>GET /dice-roll</code></div></div><p>Customize the number and sides of your dice.</p><div class="form-pair"><label>Dice count<input id="dice-count" type="number" min="1" max="10" value="2"></label><label>Sides per die<input id="dice-sides" type="number" min="2" max="100" value="6"></label></div><div class="dice-display" id="dice-display">⚄ ⚂</div><div class="result-line" id="dice-result" aria-live="polite">Ready to roll.</div><button class="primary-btn full" id="dice-btn">Roll dice →</button></article>
             <article class="module"><div class="module-head"><span class="module-icon mintish">🔢</span><div><h3>Lucky Number</h3><code>GET /luckyNumber</code></div></div><p>Guess a number between 1 and 100. See if luck is on your side!</p><label class="field-label">Your guess<input id="lucky-guess" type="number" min="1" max="100" placeholder="Enter a number (1-100)"></label><div class="result-line" id="lucky-result" aria-live="polite">Ready to test your luck.</div><button class="primary-btn full" id="lucky-btn">Guess my number →</button></article>
             <article class="module"><div class="module-head"><span class="module-icon amberish">🎱</span><div><h3>Magic 8-Ball</h3><code>GET /8Ball</code></div></div><p>Ask a question and get an answer from the universe.</p><label class="field-label">Your question<input id="eight-question" type="text" placeholder="Will my tests pass?" maxlength="180"></label><div class="eight-ball"><span id="eight-answer">8</span></div><div class="result-line" id="eight-result" aria-live="polite">The future is mysterious.</div><button class="primary-btn full" id="eight-btn">Ask the 8-ball →</button></article>
+            <article class="module redline-module">
+              <div class="module-head"><span class="module-icon pinkish">🏁</span><div><h3>Redline Race Bet</h3><code>GET /redline</code></div></div>
+              <p>Pick a racer and place your bet. The race uses weighted odds, so long shots pay more.</p>
+              <label class="field-label" for="redline-racer">Your racer
+                <select id="redline-racer">
+                  <option value="JP">JP · 1 in 25,000</option>
+                  <option value="Sonoshee">Sonoshee · 1 in 5</option>
+                  <option value="Machine Head">Machine Head · 3 in 5</option>
+                  <option value="Lynchman & JohnnyBoya">Lynchman &amp; JohnnyBoya · 1 in 10</option>
+                  <option value="Miki & Todoroki">Miki &amp; Todoroki · 499 in 25,000</option>
+                  <option value="Super Boins">Super Boins · 1 in 20</option>
+                  <option value="Gori-Rider">Gori-Rider · 1 in 100</option>
+                  <option value="Trava & Shinkai">Trava &amp; Shinkai · 1 in 50</option>
+                </select>
+              </label>
+              <label class="field-label" for="redline-bet">Bet amount
+                <input id="redline-bet" type="text" inputmode="numeric" pattern="[0-9]{1,10}" value="100" maxlength="10" autocomplete="off" aria-describedby="redline-bet-help">
+              </label>
+              <small class="redline-help" id="redline-bet-help">Enter a positive whole number (up to 10 digits).</small>
+              <div class="result-line" id="redline-result" aria-live="polite">Ready to race. Place your bet!</div>
+              <div class="redline-payout" aria-live="polite"><span>Return</span><strong id="redline-payout-value">—</strong><span>Net winnings</span><strong id="redline-winnings">—</strong></div>
+              <button class="primary-btn full" id="redline-btn">Place bet &amp; race →</button>
+            </article>
           </div>
         </section>
 
@@ -97,7 +120,7 @@
           <article class="module"><div class="module-head"><span class="module-icon pinkish">✨</span><div><h3>Compliment Generator</h3><code>GET /compliment</code></div></div><p>Because your code deserves some recognition.</p><label class="field-label">Name<input id="compliment-name" type="text" value="Developer" maxlength="80"></label><blockquote class="quote-output" id="compliment-output">“You deserve a little encouragement.”</blockquote><button class="primary-btn full" id="compliment-btn">Get a compliment →</button></article>
           </div></section>
       </div>
-      <footer class="footer">Built for IT4200 · Fall 2026 <span>Powered by Flask + a little curiosity ✦</span></footer>
+      <footer class="footer">Built for IT4200 · Fall 2026 <span>Powered by Flask + a little curiosity ✦ And me, the one who totally did something :3</span></footer>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
