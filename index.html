@@ -29,6 +29,17 @@
           <div class="hero"><div class="hero-copy"><span class="eyebrow">WELCOME TO THE PLAYGROUND <span>✦</span></span><h1>One API.<br><em>Endless possibilities.</em></h1><p>Play with your classmates’ endpoints, test random generators, and turn raw JSON into something fun.</p><button class="primary-btn" data-jump="arcade">Explore the arcade <span>→</span></button></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="glow-disc">✦</div><span class="spark s1">✧</span><span class="spark s2">✳</span><span class="spark s3">✦</span></div></div>
           <div class="section-heading"><div><span class="eyebrow muted">AT A GLANCE</span><h2>Dashboard</h2></div><span class="hint">Live data from the hosted Flask API</span></div>
           <div class="stats"><div class="stat-card"><span class="stat-icon indigo">⬡</span><span class="stat-label">API status</span><strong id="stat-status">Checking…</strong><small>Backend health</small></div><div class="stat-card"><span class="stat-icon pink">⌘</span><span class="stat-label">Available endpoints</span><strong id="stat-endpoints">—</strong><small>Registered API routes</small></div><div class="stat-card"><span class="stat-icon mint">✦</span><span class="stat-label">Interactive experiences</span><strong>10</strong><small>Ready to explore</small></div></div>
+          
+          <!-- Live API Response Viewer -->
+          <div class="section-heading"><div><span class="eyebrow muted">LIVE API DATA</span><h2>API Response Viewer</h2></div></div>
+          <article class="module">
+            <div class="module-head"><span class="module-icon blueish">↻</span><div><h3>Live Backend Status</h3><code>GET /status</code></div></div>
+            <p>Fetch and display the latest response from the class Flask API.</p>
+            <pre id="api-json-output" class="output-block" style="white-space:pre-wrap;overflow-wrap:anywhere;" aria-live="polite">Click the button to retrieve the API response.</pre>
+            <div class="result-line" id="api-refresh-time">No request made yet.</div>
+            <button class="primary-btn full" id="refresh-api-btn">Refresh API Data →</button>
+          </article>
+
           <div class="section-heading"><div><span class="eyebrow muted">QUICK START</span><h2>Pick your adventure</h2></div></div>
           <div class="feature-grid"><button class="feature-card purple" data-jump="arcade"><span class="feature-emoji">🎰</span><span class="feature-tag">PLAY</span><strong>The Arcade</strong><span>Slots, dice, coin flips and more. Let the API decide.</span><b>Launch arcade ↗</b></button><button class="feature-card teal" data-jump="tools"><span class="feature-emoji">⌨️</span><span class="feature-tag">BUILD</span><strong>Developer Tools</strong><span>Generate URL slugs, count words, and test inputs.</span><b>Open tools ↗</b></button><button class="feature-card orange" data-jump="explore"><span class="feature-emoji">🔮</span><span class="feature-tag">DISCOVER</span><strong>Surprise Me</strong><span>Random facts, prophecies, compliments, and cats.</span><b>Start exploring ↗</b></button></div>
         </section>
