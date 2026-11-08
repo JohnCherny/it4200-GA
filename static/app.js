@@ -123,6 +123,17 @@ connect('flip-btn', async () => {
   $('coin-visual').textContent = d.result === 'heads' ? 'H' : 'T';
   $('coin-result').textContent = `${d.won ? 'You win!' : 'You lose!'} It landed on ${d.result}.`;
 });
+connect('redline-btn', async () => {
+  const racer = $('redline-racer').value;
+  const bet = $('redline-bet').value;
+  if (!/^[0-9]{1,10}$/.test(bet) || Number(bet) < 1) {
+    throw new Error('Bet must be a positive whole number of up to 10 digits.');
+  }
+  const d = await api('/redline', {string:racer, bet});
+  $('redline-result').textContent = `${d.won ? 'You picked the winner!' : 'Your bet did not hit.'} Winner: ${d.winner} (draw ${d.winner_chance.toLocaleString()} of 25,000).`;
+  $('redline-payout-value').textContent = d.payout.toLocaleString();
+  $('redline-winnings').textContent = `${d.winnings < 0 ? '−' : '+'}${Math.abs(d.winnings).toLocaleString()}`;
+});
 connect('dice-btn', async () => {
   const count = Number($('dice-count').value);
   const sides = Number($('dice-sides').value);
