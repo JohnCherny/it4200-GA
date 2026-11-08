@@ -150,3 +150,25 @@ connect('compliment-btn', async () => {
 });
 showPage(location.hash.slice(1) in pages ? location.hash.slice(1) : 'overview');
 healthCheck();
+connect('even-btn', async () => {
+    const raw = $('even-number').value.trim();
+
+    // Make sure the user entered something.
+    if (!raw) {
+        throw new Error('Please enter a number.');
+    }
+
+    const number = Number(raw);
+
+    // Validate the input.
+    if (!Number.isSafeInteger(number) || number < 0) {
+        throw new Error('Please enter a valid non-negative whole number.');
+    }
+
+    // Call the class API.
+    const data = await api(`/even-or-odd/${number}`);
+
+    // Display the API response.
+    $('even-result').textContent =
+        `${data.input_number} is ${data.analysis.parity}.`;
+});

@@ -45,6 +45,37 @@
         <section id="tools" class="page"><div class="page-intro"><span class="eyebrow">FOR THE BUILDERS</span><h1>Developer <em>tools.</em></h1><p>Practical utilities backed by the endpoints in your Flask application.</p></div><div class="module-grid tools-grid">
           <article class="module"><div class="module-head"><span class="module-icon blueish">⌘</span><div><h3>Slug Generator</h3><code>GET /api/slugify</code></div></div><p>Convert text into URL-friendly strings.</p><label class="field-label">Text<input id="slug-input" type="text" value="Hello IT4200 World!" placeholder="Enter a title"></label><label class="field-label">Separator<select id="slug-separator"><option value="-">Hyphen (-)</option><option value="_">Underscore (_)</option><option value=".">Period (.)</option></select></label><div class="output-block"><span>GENERATED SLUG</span><strong id="slug-output">—</strong><button id="copy-slug" class="copy-btn" title="Copy slug" aria-label="Copy slug">Copy</button></div><button class="primary-btn full" id="slug-btn">Generate slug →</button></article>
           <article class="module"><div class="module-head"><span class="module-icon mintish">≡</span><div><h3>Word Counter</h3><code>GET /word-count</code></div></div><p>Count words, characters, and estimated reading time.</p><label class="field-label">Your text<textarea id="word-input" rows="5" placeholder="Paste or type something here…">Build something cool with Flask and Python.</textarea></label><div class="count-stats"><div><strong id="word-words">—</strong><span>Words</span></div><div><strong id="word-characters">—</strong><span>Characters</span></div><div><strong id="word-reading">—</strong><span>Minutes</span></div></div><div class="result-line" id="word-result" aria-live="polite"></div><button class="primary-btn full" id="word-btn">Analyze text →</button></article>
+
+<article class="module">
+    <div class="module-head">
+        <span class="module-icon blueish">🔢</span>
+        <div>
+            <h3>Even or Odd Checker</h3>
+            <code>GET /even-or-odd/&lt;number&gt;</code>
+        </div>
+    </div>
+
+    <p>Enter a whole number to determine whether it is even or odd.</p>
+
+    <label class="field-label">
+        Your number
+        <input
+            id="even-number"
+            type="number"
+            step="1"
+            placeholder="Enter a number"
+        >
+    </label>
+
+    <div class="result-line" id="even-result" aria-live="polite">
+        Ready to check a number.
+    </div>
+
+    <button class="primary-btn full" id="even-btn">
+        Check number →
+    </button>
+</article>
+
         </div></section>
 
         <section id="explore" class="page"><div class="page-intro"><span class="eyebrow">A LITTLE RANDOMNESS</span><h1>Explore the <em>unexpected.</em></h1><p>Discover some of the most creative endpoints your class built.</p></div><div class="module-grid">
