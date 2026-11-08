@@ -48,6 +48,24 @@ function connect(buttonId, callback) {
   });
 }
 
+connect('refresh-api-btn', async () => {
+  const output = $('api-json-output');
+  const timestamp = $('api-refresh-time');
+
+  output.textContent = 'Loading API response...';
+
+  try {
+    const data = await api('/status');
+    output.textContent = JSON.stringify(data, null, 2);
+    timestamp.textContent = `Last refreshed: ${new Date().toLocaleString()}`;
+    notify('API response loaded successfully.');
+  } catch (error) {
+    output.textContent = `Unable to load API response: ${error.message}`;
+    timestamp.textContent = 'Request failed.';
+    throw error;
+  }
+});
+
 async function healthCheck() {
   try {
     const d = await api('/status');
