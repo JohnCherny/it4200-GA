@@ -80,6 +80,22 @@ connect('spin-btn', async () => {
   $('slot-result').textContent = d.message;
 });
 
+document.getElementById('lucky-btn').addEventListener('click', async () => {
+    const guess = document.getElementById('lucky-guess').value;
+    const result = document.getElementById('lucky-result');
+    try {
+        const response = await fetch(`/luckyNumber?guess=${guess}`);
+        const data = await response.json();
+        if (!response.ok) {
+            result.textContent = data.error;
+            return;
+        }
+        result.textContent = `You guessed ${data.guess}. The number was ${data.winning_number}. Result: ${data.status}!`;
+    } catch (error) {
+        result.textContent = 'Unable to connect to the API.';
+    }
+});
+
 document.querySelectorAll('[data-coin]').forEach(button => button.addEventListener('click', () => {
   coinChoice = button.dataset.coin;
   document.querySelectorAll('[data-coin]').forEach(b => b.classList.toggle('selected', b.dataset.coin === coinChoice));
