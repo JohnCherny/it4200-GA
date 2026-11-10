@@ -25,16 +25,41 @@ function notify(message, error = false) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
 }
 
+const API_BASE = "https://two026-it4200-fall.onrender.com";
+
 async function api(path, params = {}) {
-  const url = new URL(`/backend${path}`, location.origin);
-  for (const [key, val] of Object.entries(params)) url.searchParams.set(key, val);
+  const url = new URL(path, API_BASE);
+
+  for (const [key, val] of Object.entries(params)) {
+    url.searchParams.set(key, val);
+  }
+
   let response;
-  try { response = await fetch(url, {headers:{Accept:'application/json'}}); }
-  catch { throw new Error('Cannot reach the API proxy. Start server.py and verify the hosted API is available.'); }
+
+  try {
+    response = await fetch(url, {
+      headers: { Accept: "application/json" }
+    });
+  } catch {
+    throw new Error(
+      "Cannot connect to the hosted API. Check the API connection and CORS settings."
+    );
+  }
+
   let data;
-  try { data = await response.json(); }
-  catch { throw new Error('Unexpected response from the API.'); }
-  if (!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
+
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error("Unexpected response from the API.");
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data.error || `Request failed (${response.status}).`
+    );
+  }
+
   return data;
 }
 
@@ -98,20 +123,15 @@ connect('spin-btn', async () => {
   $('slot-result').textContent = d.message;
 });
 
-document.getElementById('lucky-btn').addEventListener('click', async () => {
-    const guess = document.getElementById('lucky-guess').value;
-    const result = document.getElementById('lucky-result');
-    try {
-        const response = await fetch(`/luckyNumber?guess=${guess}`);
-        const data = await response.json();
-        if (!response.ok) {
-            result.textContent = data.error;
-            return;
-        }
-        result.textContent = `You guessed ${data.guess}. The number was ${data.winning_number}. Result: ${data.status}!`;
-    } catch (error) {
-        result.textContent = 'Unable to connect to the API.';
-    }
+connect('lucky-btn', async () => {
+  const guess = $('lucky-guess').value;
+
+  const data = await api('/luckyNumber', { guess });
+
+  $('lucky-result').textContent =
+    `You guessed ${data.your_guess}. ` +
+    `The number was ${data.number}. ` +
+    `Result: ${data.result}!`;
 });
 
 document.querySelectorAll('[data-coin]').forEach(button => button.addEventListener('click', () => {
@@ -215,5 +235,5 @@ connect('even-btn', async () => {
 
     // Display the API response.
     $('even-result').textContent =
-        `${data.input_number} is ${data.analysis.parity}.`;
+        `${data.number} is ${data.result}.`;
 });
