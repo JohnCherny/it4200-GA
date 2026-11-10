@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Find type-based counters for the 721 Pokémon in Generations 1–6 using the IT4200 hosted Flask API.">
+  <title>Pokémon Counter Finder · IT4200 Arcade</title>
+  <link rel="stylesheet" href="./static/styles.css">
+  <link rel="stylesheet" href="./static/pokemon.css">
+  <script src="./static/pokemon.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Application navigation">
+      <a class="brand" href="./index.html" aria-label="API Arcade home"><span class="brand-icon">✦</span><span>IT4200 <strong>ARCADE</strong><small>Fall 2026 · Flask API</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="./index.html#overview"><span>◫</span> Overview</a>
+        <a class="nav-link" href="./index.html#arcade"><span>◈</span> Arcade</a>
+        <a class="nav-link" href="./index.html#tools"><span>⌘</span> Developer tools</a>
+        <a class="nav-link" href="./index.html#explore"><span>✧</span> Explore API</a>
+        <a class="nav-link active" href="./pokemon.html" aria-current="page"><span>⚡</span> Pokémon Finder</a>
+      </nav>
+      <div class="sidebar-footer"><span class="status-dot" id="pokemon-status-dot"></span><span id="pokemon-sidebar-status">Connecting to API…</span><small>GitHub Pages · API on Render</small></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumb"><a href="./index.html">Workspace</a> <span>/</span> <strong>Pokémon Counter Finder</strong></div>
+        <div class="top-actions"><span class="api-pill"><span class="status-dot" id="pokemon-top-dot"></span><span id="pokemon-api-state">Checking API</span></span><a class="outline-link" href="https://two026-it4200-fall.onrender.com/api/pokemon" target="_blank" rel="noopener noreferrer">API JSON ↗</a></div>
+      </header>
+
+      <div class="content pokemon-content">
+        <section class="poke-hero" aria-labelledby="poke-heading">
+          <div class="poke-hero-copy">
+            <div class="poke-kicker"><span class="poke-kicker-dot"></span> POKÉMON BATTLE LAB <span class="poke-kicker-divider">/</span> GEN 1–6</div>
+            <h1 id="poke-heading">Every type has <em>a weakness.</em></h1>
+            <p>Pick a Pokémon and uncover its strongest type-based counter. Explore the original 721 species, compare damage multipliers, and build a better matchup.</p>
+            <div class="hero-meta"><span>⚡ 18 elemental types</span><span>◎ 721 Pokémon</span><span>◈ 6 generations</span></div>
+          </div>
+          <div class="poke-hero-art" aria-hidden="true"><div class="poke-ring poke-ring-one"></div><div class="poke-ring poke-ring-two"></div><div class="poke-ball"><span class="poke-ball-line"></span><span class="poke-ball-center"></span></div><span class="poke-spark one">✦</span><span class="poke-spark two">✧</span><span class="poke-spark three">＋</span></div>
+        </section>
+
+        <div id="poke-notice" class="poke-notice" role="status" aria-live="polite">Loading the Pokémon Pokédex from Render…</div>
+
+        <section class="poke-workbench" aria-label="Pokémon selection and matchup analysis">
+          <div class="poke-panel poke-directory">
+            <div class="poke-panel-header"><div><span class="eyebrow muted">01 / THE POKÉDEX</span><h2>Choose your opponent</h2></div><span class="poke-panel-count" id="visible-count">—</span></div>
+            <label for="pokemon-search" class="poke-label">Pokémon name or Pokédex number</label>
+            <div class="poke-search-wrap"><span aria-hidden="true">⌕</span><input id="pokemon-search" type="search" placeholder="Try Pikachu, Charizard, or 25…" autocomplete="off" spellcheck="false"></div>
+            <div class="poke-filters">
+              <label>Generation <select id="pokemon-generation"><option value="">All generations</option><option value="1">Gen 1 · Kanto</option><option value="2">Gen 2 · Johto</option><option value="3">Gen 3 · Hoenn</option><option value="4">Gen 4 · Sinnoh</option><option value="5">Gen 5 · Unova</option><option value="6">Gen 6 · Kalos</option></select></label>
+              <label>Type <select id="pokemon-type"><option value="">All types</option><option>Normal</option><option>Fire</option><option>Water</option><option>Electric</option><option>Grass</option><option>Ice</option><option>Fighting</option><option>Poison</option><option>Ground</option><option>Flying</option><option>Psychic</option><option>Bug</option><option>Rock</option><option>Ghost</option><option>Dragon</option><option>Dark</option><option>Steel</option><option>Fairy</option></select></label>
+            </div>
+            <div class="poke-list-info"><span id="directory-summary">Loading all 721 species…</span><span>SELECT TO ANALYZE <span aria-hidden="true">↘</span></span></div>
+            <div id="pokemon-list" class="pokemon-list" aria-label="Pokémon directory" aria-live="polite"><div class="poke-list-placeholder">Loading Pokémon…</div></div>
+            <button id="pokemon-more" class="poke-more" type="button" hidden>Show more Pokémon ↓</button>
+          </div>
+
+          <div class="poke-panel poke-analysis">
+            <div class="poke-panel-header"><div><span class="eyebrow muted">02 / MATCHUP INTELLIGENCE</span><h2>Counter analysis</h2></div><span class="poke-panel-pill">TYPE-BASED</span></div>
+            <div id="pokemon-selection" class="poke-selection"><div class="poke-empty-orb" aria-hidden="true">?</div><h3>No opponent selected</h3><p>Choose a Pokémon from the Pokédex to reveal its recommended counter and alternatives.</p></div>
+            <div id="pokemon-analysis" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="poke-notes" aria-labelledby="notes-title"><span class="poke-notes-icon">ⓘ</span><div><h2 id="notes-title">How the counter finder works</h2><p>Matchups are calculated by the class API using Generation 6+ type effectiveness. Recommended counters have a super-effective same-type attack. Defensive resistance or immunity ranks higher; attack strength breaks ties. <strong>Movesets, abilities, stats, held items, and alternate forms aren't considered.</strong></p></div><a href="https://two026-it4200-fall.onrender.com/api/pokemon/counter?pokemon=25" target="_blank" rel="noopener noreferrer">View example JSON ↗</a></section>
+      </div>
+      <footer class="footer">Built for IT4200 · Fall 2026 <span>Frontend: GitHub Pages · Backend: Render · Artwork: PokéAPI sprites</span></footer>
+    </main>
+  </div>
+</body>
+</html>
