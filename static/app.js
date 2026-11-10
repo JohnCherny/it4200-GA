@@ -9,7 +9,7 @@ function showPage(page) {
   document.querySelectorAll('.page').forEach(el => el.classList.toggle('active', el.id === page));
   document.querySelectorAll('.nav-link').forEach(el => el.classList.toggle('active', el.dataset.page === page));
   $('page-name').textContent = pages[page];
-  history.replaceState(null, '', `/#${page}`);
+  history.replaceState(null, '', `#${page}`);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
