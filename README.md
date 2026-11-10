@@ -1,5 +1,7 @@
 # IT4200 API Arcade — standalone frontend
 
+Hosted webpage: https://johncherny.github.io/it4200-GA
+
 This frontend connects to the **existing class API hosted on Render** at https://two026-it4200-fall.onrender.com. It does not include, clone, or modify the original `app.py`.
 
 ## Run
